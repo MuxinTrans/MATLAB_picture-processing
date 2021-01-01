@@ -1,13 +1,13 @@
-%%%%%��Ƶ�г�ͼ������
+%%%%%视频切成图像序列，并在指定位置保存图片
 fileName = 'output.mp4'; 
 %image_path=
 obj = VideoReader(fileName);
-numFrames = obj.NumberOfFrames;% ��ȡ��Ƶ��֡��CurrentTime
+numFrames = obj.NumberOfFrames;% 读取视频的帧数CurrentTime
 mkdir('frame')
 for i = 1 : numFrames
-    frame = read(obj,i);% ��ȡÿһ֡
-    %imshow(frame);%��ʾÿһ֡
+    frame = read(obj,i);% 读取每一帧
+    %imshow(frame);%显示每一帧
     namestyle=sprintf('frame/%06d',i);
-    imwrite(frame,strcat(namestyle,'.png'),'png');% ����ÿһ֡
-    %imwrite(frame,strcat(num2str(i),'.png'),'png');% ����ÿһ֡
+    imwrite(frame,strcat(namestyle,'.png'),'png');% 保存每一帧
+    %imwrite(frame,strcat(num2str(i),'.png'),'png');% 保存每一帧
 end
