@@ -1,17 +1,17 @@
-%% matlabÊÓÆµºÚ±ß²Ã¼ô
-% 1st
-%--ÊÓÆµ»­ÃæËÄÖÜºÚ±ß²Ã¼ô--%
+%% matlabè§†é¢‘é»‘è¾¹è£å‰ª
+% è¯»å–å¸¦é»‘è¾¹çš„è§†é¢‘ï¼Œè£å‰ªé»‘è¾¹å¹¶å¾—åˆ°æ–°çš„è§†é¢‘ã€‚è¯»å–æ–°çš„è§†é¢‘ï¼Œæ˜¾ç¤ºè§†é¢‘ï¼Œå¹¶è¯»å–æ¯å¸§å›¾åƒçš„ç°åº¦å€¼ï¼Œå­˜åˆ°ç›¸åº”çŸ©é˜µã€‚
+%--è§†é¢‘ç”»é¢å››å‘¨é»‘è¾¹è£å‰ª--%
 clc
 clear all
 close all
-%´´½¨ÊÓÆµÎÄ¼ş²¢´ò¿ª 
+%åˆ›å»ºè§†é¢‘æ–‡ä»¶å¹¶æ‰“å¼€ 
 vidObj = VideoWriter('output','MPEG-4');
 open(vidObj);
-% Ô­ÊÓÆµ´ò¿ª
-v = VideoReader('F:\AI\¿ÆÑĞ×ÊÁÏÕûÀí\¾±¶¯ÂöÊı¾İ\20200913\20200913\Ç¿»ØÉù°ß¿é\Imag50.avi');   %¶ÁÈ¡ÊÓÆµ
+% åŸè§†é¢‘æ‰“å¼€
+v = VideoReader('F:\AI\ç§‘ç ”èµ„æ–™æ•´ç†\é¢ˆåŠ¨è„‰æ•°æ®\20200913\20200913\å¼ºå›å£°æ–‘å—\Imag50.avi');   %è¯»å–è§†é¢‘
 ori_height = v.Height; ori_width = v.Width; ori_nFrames = v.NumberOfFrames;
-f = rgb2gray(read(v,1));     %¶ÁÈ¡²ÊÉ«ÊÓÆµÖ¡²¢»Ò¶È»¯
-%È·¶¨·¶Î§   ×óÓÒ±ß½ç-----
+f = rgb2gray(read(v,1));     %è¯»å–å½©è‰²è§†é¢‘å¸§å¹¶ç°åº¦åŒ–
+%ç¡®å®šèŒƒå›´   å·¦å³è¾¹ç•Œ-----
 a = 0; b = 0;
 for w = 1:ori_width   
     if(f(ori_height/2,w) > 0)
@@ -25,7 +25,7 @@ for w = ori_width:-1:1
         break;
     end
 end
-%È·¶¨·¶Î§   ÉÏÏÂ±ß½ç-----
+%ç¡®å®šèŒƒå›´   ä¸Šä¸‹è¾¹ç•Œ-----
 c = 0; d = 0;
 for h = 1:ori_height   
     if(f(h,ori_width/2) > 0)
@@ -40,25 +40,25 @@ for h = ori_height:-1:1
     end
 end
 
-%½ØÈ¡ÊÓÆµĞ´ÈëÁíÒ»ÊÓÆµÎÄ¼ş-----
+%æˆªå–è§†é¢‘å†™å…¥å¦ä¸€è§†é¢‘æ–‡ä»¶-----
 for n = 1:ori_nFrames
     f = read(v,n);
-    writeVideo(vidObj,f(c:d,a:b,:));         %½ØÈ¡ÊÓÆµÖ¡µÄ²¿·ÖĞ´ÈëÊÓÆµ
+    writeVideo(vidObj,f(c:d,a:b,:));         %æˆªå–è§†é¢‘å¸§çš„éƒ¨åˆ†å†™å…¥è§†é¢‘
     clc;
-    fprintf('½ø¶È£º%d / %d \n',n,ori_nFrames);
+    fprintf('è¿›åº¦ï¼š%d / %d \n',n,ori_nFrames);
 end
-%¹Ø±ÕÊÓÆµÎÄ¼ş
+%å…³é—­è§†é¢‘æ–‡ä»¶
 close(vidObj);
 
-xyloObj = VideoReader('output.mp4'); %ÏàÓ¦ĞŞ¸ÄÎªĞèÒª¶ÁÈ¡µÄÊÓÆµÎÄ¼ş
-nFrames = xyloObj.NumberOfFrames; %»ñÈ¡ÊÓÆµ×ÜÖ¡Êı
-vidHeight = xyloObj.Height; %»ñÈ¡ÊÓÆµ¸ß¶È
-vidWidth = xyloObj.Width; %»ñÈ¡ÊÓÆµ¿í¶È
+xyloObj = VideoReader('output.mp4'); %ç›¸åº”ä¿®æ”¹ä¸ºéœ€è¦è¯»å–çš„è§†é¢‘æ–‡ä»¶
+nFrames = xyloObj.NumberOfFrames; %è·å–è§†é¢‘æ€»å¸§æ•°
+vidHeight = xyloObj.Height; %è·å–è§†é¢‘é«˜åº¦
+vidWidth = xyloObj.Width; %è·å–è§†é¢‘å®½åº¦
 
-for k = 1 : nFrames %±éÀúÃ¿Ò»Ö¡
-    I = read(xyloObj, k); %¶Á³öµ±Ç°Ö¡
-    imshow(I); %ÏÔÊ¾µ±Ç°Ö¡
-    pause(0.005); %ÔİÍ£ÏµÍ³£¬Ê¹ÈËÑÛÁ¬¹á¹Û²ìµ½Ã¿Ò»Ö¡£¬´ËÉèÎª0.005Ãë
+for k = 1 : nFrames %éå†æ¯ä¸€å¸§
+    I = read(xyloObj, k); %è¯»å‡ºå½“å‰å¸§
+    imshow(I); %æ˜¾ç¤ºå½“å‰å¸§
+    pause(0.005); %æš‚åœç³»ç»Ÿï¼Œä½¿äººçœ¼è¿è´¯è§‚å¯Ÿåˆ°æ¯ä¸€å¸§ï¼Œæ­¤è®¾ä¸º0.005ç§’
     
     img=rgb2gray(I);
     max=0;min=255;avg=0;
